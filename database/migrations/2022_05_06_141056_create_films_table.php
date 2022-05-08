@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title',255);
             $table->integer('minute_long');
             $table-> foreignId('topic_id');
-            $table-> string('cover',255);
+            $table-> string('cover',255)->default('');
             $table->timestamps();
         });
     }

@@ -1,59 +1,32 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.main')
+@section('content')
+    <div class='row'>
+        <div class='col-md-8 col-lg-6 mx-auto'>
+            <div class='card'>
+                <div class="card-body">
+                    <h3 class='display-3 mb-5'>{{ __('Sign up') }}</h3>
+                    <form method='post' action='{{ route('register') }}'>
+                        @csrf
+                        <x-forms.input name="name" label="{{__('Full name')}}" placeholder="{{__('Full name')}}"/>
+                        <x-forms.input name="email" type="email" label="{{__('Email')}}" placeholder="{{__('Email')}}"/>
+                        <x-forms.input name="password" type="password" label="{{__('Password')}}" placeholder="{{__('Password')}}"/>
+                        <x-forms.input name="password_confirmation" type="password" label="{{__('Password confirmation')}}" placeholder="{{__('Password confirmation')}}"/>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input {{ $errors -> has('terms') ? ' is-invalid' : ''}}" type="checkbox" value="1" name='terms' id="terms">
+                            <label class="form-check-label" for="terms">
+                              {{__('Accept every rules')}}
+                            </label>
+                            <div class="invalid-feedback">
+                                You must agree before register.
+                            </div>
+                          </div>
+                        <div class='d-grid'>
+                            <button type='submit' class='btn btn-primary btn-lg'> {{'Register'}}</button>
+                        </div>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name')" />
-
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                    </form>
+                </div>
             </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+        </div>
+    </div>
+@endsection

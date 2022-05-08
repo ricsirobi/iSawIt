@@ -17,7 +17,7 @@ class FilmRequest extends FormRequest
             'title' => 'required|min:2|max:240',
             'topic_id' => 'required|exists:topics,id',
             'minute_long' => 'required',
-            'cover' => 'required|image|file'
+            'cover' => 'image|file'
 
         ];
     }

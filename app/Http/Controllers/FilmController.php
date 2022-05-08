@@ -72,7 +72,13 @@ class FilmController extends Controller
      */
     public function edit(Film $film)
     {
-        //
+        /*if($film->author != Auth::user() )
+        {
+            return abort(403);
+        }*/
+
+        $topics = Topic::orderBy('name')->get();
+        return view('film.edit')->with(compact('film','topics'));
     }
 
     /**
@@ -83,8 +89,30 @@ class FilmController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(FilmRequest $request, Film $film)
-    {
-        //
+    { 
+        /*if($film->author != Auth::user() )
+        {
+            return abort(403);
+        }*/
+
+        $film ->update($request->except('_token'));
+
+        $image = $this -> uploadImage($request);
+        if($image)
+        {
+            if($film->cover)
+            {
+                //TODO: delete prev image from server
+            }
+            $film->cover = $image->basename;
+            $film ->  save();
+        }
+        else
+        {
+            $film->cover = "";
+        }
+       
+        return redirect()->route('film.details',$film)->with('success',__("Film edited successfully"));
     }
 
     /**
@@ -101,6 +129,10 @@ class FilmController extends Controller
     {
         $file = $request-> file('cover');
        
+        if(!$file)
+        {
+            return "";
+        }
         $fileName = uniqid();
         $cover = Image::make($file)->save(public_path("upload/img/cover/{$fileName}.{$file->extension()}"));
         //resize/watermark itt lehetséges

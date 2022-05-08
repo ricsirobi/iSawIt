@@ -20,23 +20,31 @@
             </style>
 
             <ul class="ml-auto nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="{{ route('home') }}" class="nav-link px-2 text-secondary"> {{ config('app.name') }}</a>
-                </li>
-                <li><a href="{{ route('film.all') }}" class="nav-link px-2 text-white {{ request()->routeIs('film.all') ? ' active' : '' }}">Films</a></li>
-                <li><a href="{{ route('film.add') }}" class="nav-link px-2 text-white {{ request()->routeIs('film.add') ? ' active' : '' }}">Add film</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Series</a></li>
-
-
+                <li><a href="{{ route('home') }}" class="nav-link px-2 text-secondary"> {{ config('app.name') }}</a></li>
+                
                 <!--------------------------------------------------------------------------------------------------------------------------------------->
-                <div class="btn-group">
+                <div class="btn-group nav-link px-2 text-secondary" >
                     <button type="button" class="btn btn-secondary  dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Categories
+                        Films
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">See all</a></li>
+                        <li><a class="dropdown-item" href="{{route('film.all')}}">See all</a></li>
                         @foreach ($topics as $topic)
-                            <li> <a href="#" class="dropdown-item "> {{ $topic->name }} </a> </li>
+                            <li> <a href="{{route('topic.show.film',$topic)}}" class="dropdown-item "> {{ $topic->name }} </a> </li>
+                        @endforeach
+                    </ul>
+                </div>
+
+                <div class="btn-group nav-link px-2 text-secondary">
+                    <button type="button" class="btn btn-secondary  dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Series
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{route('film.all')}}">See all</a></li>
+                        @foreach ($topics as $topic)
+                            <li> <a href="{{route('topic.show.film',$topic)}}" class="dropdown-item "> {{ $topic->name }} </a> </li>
                         @endforeach
                     </ul>
                 </div>
@@ -50,8 +58,27 @@
             </form>
 
             <div class="text-end">
-                <button type="button" class="btn btn-outline-light me-2">Login</button>
-                <button type="button" class="btn btn-warning">Sign-up</button>
+                @auth
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary  dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img class="rounded-circle me-2" width="30" src="{{Auth::user()->avatar}}"/>
+                        {{Auth::user()->name}}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{route('profile.show',Auth::user()->id)}}">{{__('Profile')}}</a></li>
+                        <li> <a href="{{ route('film.add') }}" class="dropdown-item {{ request()->routeIs('film.add') ? ' active' : '' }}">{{__('Add film')}}</a> </li>
+                        <li> <form method="post" action="{{ route('logout') }}"> @csrf <button class="dropdown-item ">{{__('Sign out')}}</button> </form> </li>
+                    </ul>
+                </div>
+                
+                
+                
+                @else
+                <a href="{{route('login')}}" class="btn btn-outline-light me-2">{{__('Login')}}</a>
+                <a href="{{route('register')}}" class="btn btn-warning">{{__('Sign-up')}}</a>
+                @endauth
+                
             </div>
         </div>
     </div>
