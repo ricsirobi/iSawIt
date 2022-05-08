@@ -19,10 +19,6 @@ class Film extends Model
         return $this -> belongsTo(Topic::class);
     }
 
-    public function user()
-    {
-        return $this -> belongsToMany(User::class);
-    }
 
    public function getHasCoverAttribute()
    {
@@ -37,6 +33,11 @@ class Film extends Model
     return "https://via.placeholder.com/350";
         
    }
+
+   public function views()
+    {
+        return $this->morphMany(View::class,"viewable");
+    }
     
 
 }

@@ -10,19 +10,19 @@ class Serie extends Model
     use HasFactory;
 
     protected $fillable = [
-        'season','episode_count', 'category_id', 'title' ,'cover' 
+        'season', 'episode_count', 'category_id', 'title', 'cover'
 
     ];
 
 
     public function category()
     {
-        return $this -> belongsTo(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function episode()
     {
-        return $this -> hasMany(Episode::class);
+        return $this->hasMany(Episode::class);
     }
-    
+
 }

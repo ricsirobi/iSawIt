@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Image;
 use App\Models\Film;
 use Illuminate\Http\Request;
-use App\Models\Category;
 use App\Models\Topic;
 use App\Http\Requests\FilmRequest;
+use App\Models\View;
+use Auth;
 
 class FilmController extends Controller
 {
@@ -18,7 +19,7 @@ class FilmController extends Controller
      */
     public function index()
     {
-        $films = Film::orderBy('title')->paginate(10);
+        $films = Film::orderBy('title')->paginate(3);
         return view('film.all')->with(compact('films'));
     }
 
@@ -137,5 +138,25 @@ class FilmController extends Controller
         $cover = Image::make($file)->save(public_path("upload/img/cover/{$fileName}.{$file->extension()}"));
         //resize/watermark itt lehetséges
         return $cover;
+    }
+
+    public function seenFilm(Film $film, Request $request)
+    {
+        $request->validate([
+            'seen' => 'required|',
+        ]);
+        
+        $view = new View();
+        $view->user()->associate(Auth::user());
+        if(!$film->views->where('user_id', '=', $view->user_id)->all())
+        {
+            $film -> views()->save($view);
+            return back()->with('success',__("Added to seen"));
+        }
+        else
+        {
+            $film -> views()->delete($view);
+            return back()->with('error',__("Deleted from seen"));
+        }
     }
 }

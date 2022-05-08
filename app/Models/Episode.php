@@ -19,8 +19,10 @@ class Episode extends Model
         return $this -> belongsTo(Serie::class);
     }
 
-    public function user()
+    public function views()
     {
-        return $this -> belongsToMany(User::class);
+        return $this->morphMany(View::class,"viewable");
     }
+
+    
 }

@@ -30,6 +30,10 @@ Route::middleware(['auth'])->group( function () {
     Route::get('/film/{film}/edit', [Controllers\FilmController::class, 'edit'])->name('film.edit');
     Route::post('/film/{film}/edit', [Controllers\FilmController::class, 'update']);
     
+
+    //film.seen
+    Route::post('/film/{film}/seen', [Controllers\FilmController::class, 'seenFilm']) -> name("film.seen");
+    
 });
 
 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
@@ -41,4 +45,6 @@ Route::get('/film/{film}', [Controllers\FilmController::class, 'show'])->name('f
 Route::get('/topic/{topic}/film', [Controllers\TopicController::class, 'show'])->name('topic.show.film');
 
 Route::get('/profile/{user}', [Controllers\ProfileController::class, 'show'])->name('profile.show');
+
+
 
