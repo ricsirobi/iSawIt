@@ -6,20 +6,22 @@
     </p>
     <p class='fw-bold'> {{ $film->minute_long }} {{ __('minute long') }}</p>
     <p>
-        {{ __('Users seen') }}: {{ count($film->views) }}
+        {{ __('Users seen') }}: {{ count($film->views) }} {{!count($film->views->where('user_id', '=', Auth::user()->id)) ? "" : "(with you)"}} 
     </p>
     <p>
     <div class="mb-3">
         <form action="{{ route('film.seen', $film) }}" method="post">
             @csrf
-            <button name="seen" value="1" class="btn btn-outline-success"> {{ __('I already seen it') }}</button>
+            <button name="seen" value="1" class="btn  
+            {{!count($film->views->where('user_id', '=', Auth::user()->id)) ? " btn-outline-success" : " btn-outline-danger"}} "> 
+            {{!count($film->views->where('user_id', '=', Auth::user()->id)) ? "I already seen it" : "I haven't seen it yet"}} </button>
         </form>
-    </div>
 
     <form action="{{ route('film.edit', $film) }}" method="get">
         @csrf
         <button name="seen" value="1" class="btn btn-outline-warning"> {{ __('Edit') }}</button>
     </form>
+</div>
     </p>
-    <img src='{{ $film->cover_image }}' width="500" height="auto" />
+    <img src='{{ $film->cover_image }}' alt="{{$film->title}}" width="500" height="auto" />
 @endsection

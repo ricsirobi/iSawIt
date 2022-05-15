@@ -9,6 +9,11 @@ class View extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'viewable_type', 
+
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

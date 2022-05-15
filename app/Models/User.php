@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\View;
 
 class User extends Authenticatable
 {
@@ -43,15 +44,11 @@ class User extends Authenticatable
     ];
 
 
-    public function film()
+    public function saw()
     {
-        return $this -> belongsToMany(Film::class);
+        return $this->hasMany(View::class); //itt a hiba amit nem értek
     }
 
-    public function episode()
-    {
-        return $this -> belongsToMany(Episode::class);
-    }
 
     public function getAvatarAttribute()
     {

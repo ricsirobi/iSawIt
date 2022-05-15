@@ -155,7 +155,7 @@ class FilmController extends Controller
         }
         else
         {
-            $film -> views()->delete($view);
+            $film-> views()-> where('user_id', '=', $view->user_id)->delete(); 
             return back()->with('error',__("Deleted from seen"));
         }
     }

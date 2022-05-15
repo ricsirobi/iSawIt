@@ -42,9 +42,9 @@
                         Series
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{route('film.all')}}">See all</a></li>
+                        <li><a class="dropdown-item" href="{{route('serie.all')}}">See all</a></li>
                         @foreach ($topics as $topic)
-                            <li> <a href="{{route('topic.show.film',$topic)}}" class="dropdown-item "> {{ $topic->name }} </a> </li>
+                            <li> <a href="{{route('topic.show.serie',$topic)}}" class="dropdown-item "> {{ $topic->name }} </a> </li>
                         @endforeach
                     </ul>
                 </div>
@@ -66,8 +66,10 @@
                         {{Auth::user()->name}}
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{route('profile.show',Auth::user()->id)}}">{{__('Profile')}}</a></li>
+                        <li><a class="dropdown-item {{ request()->routeIs('profile.show') ? ' active' : '' }}" href="{{route('profile.show',Auth::user()->id)}} ">{{__('Profile')}}</a></li>
+                        <li><a class="dropdown-item {{ request()->routeIs('profile.setting') ? ' active' : '' }}" href="{{route('profile.show',Auth::user()->id)}}">{{__('Settings')}}</a></li>
                         <li> <a href="{{ route('film.add') }}" class="dropdown-item {{ request()->routeIs('film.add') ? ' active' : '' }}">{{__('Add film')}}</a> </li>
+                        <li> <a href="{{ route('serie.add') }}" class="dropdown-item {{ request()->routeIs('serie.add') ? ' active' : '' }}">{{__('Add serie')}}</a> </li>
                         <li> <form method="post" action="{{ route('logout') }}"> @csrf <button class="dropdown-item ">{{__('Sign out')}}</button> </form> </li>
                     </ul>
                 </div>
