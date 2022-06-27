@@ -35,8 +35,8 @@
 
 	
 	<script>
-		document.getElementsByName("video")[0].style.pointerEvents = "none";
-    document.getElementsByName("video")[1].style.pointerEvents = "none";
+		//document.getElementsByName("video")[0].style.pointerEvents = "none";
+    //document.getElementsByName("video")[1].style.pointerEvents = "none";
 	</script>
 
   </div>

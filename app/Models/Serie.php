@@ -20,6 +20,11 @@ class Serie extends Model
         return $this -> belongsTo(Topic::class);
     }
 
+    public function episodes()
+    {
+        return $this -> hasMany(Episode::class);
+    }
+
     public function getHasCoverAttribute()
    {
        return $this->cover != null;

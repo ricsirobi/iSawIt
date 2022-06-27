@@ -38,9 +38,8 @@ Route::middleware(['auth'])->group( function () {
 
     Route::get('/addepisode', [Controllers\EpisodeController::class, 'create'])->name('episode.add');
     Route::post('/addepisode', [Controllers\EpisodeController::class, 'store']);
-    Route::get('/episode/{episode}/edit', [Controllers\EpisodeController::class, 'edit'])->name('serie.edit');
-    Route::post('/episode/{episode}/edit', [Controllers\EpisodeController::class, 'update']);
-    Route::post('/episode/{episode}/seen', [Controllers\EpisodeController::class, 'seenSerie']) -> name("episode.seen");
+    //Route::post('/episode/{episode}/edit', [Controllers\EpisodeController::class, 'update']);
+    Route::post('/episode/{episode}/seen', [Controllers\EpisodeController::class, 'seenEpisode']) -> name("episode.seen");
 });
 
 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
@@ -58,6 +57,7 @@ Route::get('/topic/{topic}/serie', [Controllers\TopicController::class, 'showSer
 
 Route::get('/profile/{user}', [Controllers\ProfileController::class, 'show'])->name('profile.show');
 Route::get('/profile/{user}/settings', [Controllers\ProfileController::class, 'show'])->name('profile.settings');
+//Route::get('/profile/{user}/destroy', [Controllers\ProfileController::class, 'show'])->name('profile.settings');
 
 
 

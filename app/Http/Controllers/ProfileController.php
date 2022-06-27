@@ -82,6 +82,7 @@ class ProfileController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('home')->with('success',__("User deleted successfully"));
     }
 }

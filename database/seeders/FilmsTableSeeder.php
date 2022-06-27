@@ -19,19 +19,19 @@ class FilmsTableSeeder extends Seeder
             'title'=>'Star Wars Episode I: The Phantom Menace' , 
             'minute_long'=>'133',
             'topic_id'=>1,
-            'cover'=>'',
+            'cover'=>'!sw1.jpg',
         ]);
         Film::create([
             'title'=>'Star Wars Episode II: Attack of the Clones' , 
             'minute_long'=>'142',
             'topic_id'=>1,
-            'cover'=>'',
+            'cover'=>'!sw2.jpg',
         ]);
         Film::create([
             'title'=>'Star Wars Episode III: Revenge of the Sith' , 
             'minute_long'=>'140',
             'topic_id'=>1,
-            'cover'=>'',
+            'cover'=>'!sw3.jpg',
         ]);
     }
 }

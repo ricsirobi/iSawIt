@@ -9,7 +9,7 @@
         }
 
     </style>
-
+    
     <h1 class='disply-1'> {{ $serie->title }} - {{ $serie->season }}. {{ __('season') }}</h1>
     <p> <a class="btn btn-sm btn-secondary" href="{{ route('topic.show.serie', $serie->topic) }}">{{ __('series') }},
             {{ $serie->topic->name }} </a> {{ $serie->created_at->diffForHumans() }}
@@ -39,16 +39,28 @@
                         </div>
                         <div class="panel-body">
                             <ul class="list-group">
+                                <?php  $episodes = $serie->episodes ?>
+                                @foreach ($episodes as $episode)
                                 <li class="list-group-item">
-                                    <form action="" method="">
+                                    <form action="{{ route('episode.seen', $episode) }}" method="post">
                                         <div class='d-flex align-items-center mb-4'>
-                                            <div class=""> 1</div>
-                                            <strong class="ms-auto"> Pilot </strong>
-                                            <div class="ms-auto"> 80 min </div>
-                                            <input type="submit" class="btn btn-primary ms-auto" value="I already seen it">
+                                            <form action="{{ route('episode.seen', $episode) }}" method="post">
+                                            <input type='hidden' name="h" value = {{$episode->id}}>
+                                            <div class=""> {{$episode->episode_number}} </div>
+                                            <strong class="ms-auto"> {{$episode->title}} </strong>
+                                            <div class="ms-auto mb-3"> {{$episode->minute_long}}  {{__("min  ")}} </div>
+                                            
+                                                @csrf
+                                                <div class="ms-auto mb-3">
+                                                <button name="seen" value="1" class="btn  
+                                                {{!count($episode->views->where('user_id', '=', Auth::user()->id)) ? " btn-outline-success" : " btn-outline-danger"}} "> 
+                                                {{!count($episode->views->where('user_id', '=', Auth::user()->id)) ? "I already seen it" : "I haven't seen it yet"}} </button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </form>
                                 </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

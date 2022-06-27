@@ -11,6 +11,7 @@
     <p>
     <div class="mb-3">
         <form action="{{ route('film.seen', $film) }}" method="post">
+            
             @csrf
             <button name="seen" value="1" class="btn  
             {{!count($film->views->where('user_id', '=', Auth::user()->id)) ? " btn-outline-success" : " btn-outline-danger"}} "> 

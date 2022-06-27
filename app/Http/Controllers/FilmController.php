@@ -95,22 +95,28 @@ class FilmController extends Controller
         {
             return abort(403);
         }*/
-
+        $oldimage = $film->cover;
         $film ->update($request->except('_token'));
 
         $image = $this -> uploadImage($request);
         if($image)
         {
+            
             if($film->cover)
             {
                 //TODO: delete prev image from server
+                //$oldimage->delete();
             }
             $film->cover = $image->basename;
             $film ->  save();
         }
         else
         {
-            $film->cover = "";
+            if($request->get('cover') == "")
+            {
+                $film->cover = "";
+            }
+            
         }
        
         return redirect()->route('film.details',$film)->with('success',__("Film edited successfully"));

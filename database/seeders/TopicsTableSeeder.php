@@ -15,14 +15,14 @@ class TopicsTableSeeder extends Seeder
      */
     public function run()
     {
-        Topic::create(['name'=>'Sci-Fi']);
-        Topic::create(['name'=>'Action']);
-        Topic::create(['name'=>'Horror']);
-        Topic::create(['name'=>'Comedy']);
-        Topic::create(['name'=>'Fantasy']);
-        Topic::create(['name'=>'Mystery']);
-        Topic::create(['name'=>'Romance']);
-        Topic::create(['name'=>'Thriller']);
-        Topic::create(['name'=>'Western']);
+        Topic::create(['id'=>1,'name'=>'Sci-Fi']);
+        Topic::create(['id'=>2,'name'=>'Action']);
+        Topic::create(['id'=>3,'name'=>'Horror']);
+        Topic::create(['id'=>4,'name'=>'Comedy']);
+        Topic::create(['id'=>5,'name'=>'Fantasy']);
+        Topic::create(['id'=>6,'name'=>'Mystery']);
+        Topic::create(['id'=>7,'name'=>'Romance']);
+        Topic::create(['id'=>8,'name'=>'Thriller']);
+        Topic::create(['id'=>9,'name'=>'Western']);
     }
 }

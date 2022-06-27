@@ -10,7 +10,7 @@
                      {{ $serie->topic->name}}</a> | {{ $serie->minute_long }} {{ __('minutes long') }} |
                     {{ $serie->created_at->diffForHumans() }} </p>
             </div>
-
+            
             <div class='mb-3'>
                 <p class="text-end"> 
                     <a class = 'btn btn-sm btn-primary' href='{{ route('serie.details',$serie) }}'> {{__('Check')}}</a>    

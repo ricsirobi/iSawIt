@@ -54,7 +54,7 @@
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                <!--<input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">-->
             </form>
 
             <div class="text-end">
@@ -70,6 +70,7 @@
                         <li><a class="dropdown-item {{ request()->routeIs('profile.setting') ? ' active' : '' }}" href="{{route('profile.show',Auth::user()->id)}}">{{__('Settings')}}</a></li>
                         <li> <a href="{{ route('film.add') }}" class="dropdown-item {{ request()->routeIs('film.add') ? ' active' : '' }}">{{__('Add film')}}</a> </li>
                         <li> <a href="{{ route('serie.add') }}" class="dropdown-item {{ request()->routeIs('serie.add') ? ' active' : '' }}">{{__('Add serie')}}</a> </li>
+                        <li> <a href="{{ route('episode.add') }}" class="dropdown-item {{ request()->routeIs('episode.add') ? ' active' : '' }}">{{__('Add episode')}}</a> </li>
                         <li> <form method="post" action="{{ route('logout') }}"> @csrf <button class="dropdown-item ">{{__('Sign out')}}</button> </form> </li>
                     </ul>
                 </div>
